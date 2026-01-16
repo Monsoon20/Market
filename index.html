@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARKET.UA | Твій маркетплейс</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <header class="header">
+        <div class="container">
+            <div class="logo" onclick="filterByCat('all')">MARKET.<span>UA</span></div>
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Я шукаю..." oninput="searchItems()">
+                <i class="fas fa-search"></i>
+            </div>
+
+            <div class="user-menu" id="userMenu">
+                <button class="btn-login" onclick="toggleModal('authModal')">Увійти</button>
+                <button class="btn-add" onclick="toggleModal('sellModal')">+ Продати</button>
+            </div>
+        </div>
+    </header>
+
+    <nav class="cat-nav">
+        <div class="container">
+            <div class="cat-list">
+                <div class="cat-link active" onclick="filterByCat('all', this)">Всі</div>
+                <div class="cat-link" onclick="filterByCat('Авто', this)">Авто</div>
+                <div class="cat-link" onclick="filterByCat('Електроніка', this)">Електроніка</div>
+                <div class="cat-link" onclick="filterByCat('Дім', this)">Дім</div>
+                <div class="cat-link" onclick="filterByCat('Одяг', this)">Одяг</div>
+                <div class="cat-link" onclick="filterByCat('Хобі', this)">Хобі</div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        <div class="ads-grid" id="adsGrid"></div>
+        <div id="emptyMsg" class="empty-state">
+            <p>Тут поки порожньо. Додайте перший товар!</p>
+        </div>
+    </main>
+
+    <div class="modal-overlay" id="detailModal">
+        <div class="modal detail-modal">
+            <span class="close" onclick="toggleModal('detailModal')">&times;</span>
+            <div id="itemDetailContent"></div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="sellModal">
+        <div class="modal">
+            <span class="close" onclick="toggleModal('sellModal')">&times;</span>
+            <h3>Нове оголошення</h3>
+            <form id="sellForm">
+                <input type="text" id="itemTitle" placeholder="Назва" required>
+                <input type="number" id="itemPrice" placeholder="Ціна (грн)" required>
+                <select id="itemCat">
+                    <option value="Авто">Авто</option>
+                    <option value="Електроніка">Електроніка</option>
+                    <option value="Дім">Дім</option>
+                    <option value="Одяг">Одяг</option>
+                    <option value="Хобі">Хобі</option>
+                </select>
+                <textarea id="itemDesc" placeholder="Опис товару" rows="3" required></textarea>
+                <input type="url" id="itemImg" placeholder="URL фото">
+                <button type="submit" class="btn-submit">Опублікувати</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="authModal">
+        <div class="modal">
+            <span class="close" onclick="toggleModal('authModal')">&times;</span>
+            <h3>Вхід</h3>
+            <form onsubmit="login(event)">
+                <input type="text" id="loginName" placeholder="Ім'я" required>
+                <button class="btn-submit">Увійти</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
